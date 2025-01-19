@@ -71,3 +71,13 @@ model = DummyGPTModel(GPT_CONFIG_124M)
 logits = model(batch)
 print(f'Output shape: {logits.shape}')
 print(logits)
+
+# 5 inputs and six outputs
+batch_example = torch.rand(2, 5)
+layer = nn.Sequential(nn.Linear(5, 6), nn.ReLU())
+out = layer(batch_example)
+print(out)
+
+mean = out.mean(dim=-1, keepdim=True)
+var = out.var(dim=-1, keepdim=True)
+print(f'Mean: {mean}\nVariance: {var}\n')
