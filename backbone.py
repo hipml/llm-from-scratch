@@ -81,3 +81,13 @@ print(out)
 mean = out.mean(dim=-1, keepdim=True)
 var = out.var(dim=-1, keepdim=True)
 print(f'Mean: {mean}\nVariance: {var}\n')
+
+# sqrt(var) = std deviation!
+out_norm = (out - mean) / torch.sqrt(var)
+mean = out_norm.mean(dim=-1, keepdim=True)
+var = out_norm.var(dim=-1, keepdim=True)
+
+torch.set_printoptions(sci_mode=False)
+print(f'Normalized layer outputs:\n{out_norm}')
+print(f'Mean:\n{mean}')
+print(f'Var:\n{var}')
