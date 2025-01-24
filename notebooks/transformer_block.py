@@ -1,3 +1,6 @@
+import torch
+import torch.nn as nn
+
 from attention import MultiHeadAttention
 from activation import FeedForward
 from normalization import LayerNorm
