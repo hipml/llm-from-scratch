@@ -36,3 +36,26 @@ print(out)
 
 total_params = sum(p.numel() for p in model.parameters())
 print(f'Total number of params: {total_params}')
+
+# total params in feed forward and attention modules
+# print(sum(p.numel() for p in model.trf_blocks.parameters()))
+from src.transformer_block import TransformerBlock
+block = TransformerBlock(GPT_CONFIG_124M)
+block_params = GPT_CONFIG_124M['n_layers'] * (sum(p.numel() for p in block.att.parameters()) + sum(p.numel() for p in block.ff.parameters()))
+print(f'Params in ff & attn: {block_params}')
+
+def generate_text_simple(model, idx, max_new_tokens, context_size):
+    for _ in range(max_new_tokens):
+        idx_cond = idx[:, -context_size:]
+        with torch.no_grad():
+            logits = model(idx_cond)
+
+        # [batch_size, num_token, vocab_size]
+        logits = logits[:, -1, :]
+
+        probas = torch.softmax(logits, dim=-1)
+        idx_next = torch.argmax(probas, dim=-1, keepdim=True)
+        idx = torch.cat((idx, idx_next), dim=1)
+    return idx
+
+
