@@ -2,6 +2,8 @@ from transformers import AutoModelForCausalLM, LlamaForCausalLM, AutoTokenizer
 from huggingface_hub import login
 import torch
 
+from src.gpt_model import GPTModel
+
 model = LlamaForCausalLM.from_pretrained(
     'meta-llama/Llama-3.2-1B',
     torch_dtype=torch.float16,
@@ -10,7 +12,7 @@ model = LlamaForCausalLM.from_pretrained(
 
 print(model)
                                          
-"""
+'''
 LlamaForCausalLM(
   (model): LlamaModel(
     (embed_tokens): Embedding(128256, 2048)
@@ -38,7 +40,7 @@ LlamaForCausalLM(
   )
   (lm_head): Linear(in_features=2048, out_features=128256, bias=False)
 )
-"""
+'''
 
 model = AutoModelForCausalLM.from_pretrained(
     'Qwen/Qwen2.5-0.5B',
@@ -79,6 +81,21 @@ Qwen2ForCausalLM(
 
 
 # and our own for comparison
+GPT_CONFIG_124M = {
+    "vocab_size": 50257, 
+    "context_length": 1024,
+    "emb_dim": 768, 
+    "n_heads": 12, 
+    "n_layers": 12, 
+    "drop_rate": 0.1, 
+    "qkv_bias": False 
+}
+
+torch.manual_seed(123)
+model = GPTModel(GPT_CONFIG_124M)
+
+print(model)
+
 """
 GPTModel(
   (tok_emb): Embedding(50257, 768)

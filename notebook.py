@@ -74,4 +74,4 @@ out = generate_text_simple(
     context_size=GPT_CONFIG_124M['context_length']
 )
 print(f'output: {out}')
-print(f'output length: {len(out[0])}')`
+print(f'output length: {len(out[0])}')
