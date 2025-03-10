@@ -1,3 +1,5 @@
+import tiktoken
+
 import torch
 import torch.nn as nn
 
@@ -5,6 +7,10 @@ from src.gpt_model import GPTModel
 from src.gpt_download import download_and_load_gpt2
 
 from notebooks.generation import generate
+from notebooks.generation import text_to_token_ids, token_ids_to_text
+
+tokenizer = tiktoken.get_encoding('gpt2')
+
 settings, params = download_and_load_gpt2(model_size='124M', models_dir='gpt2')
 
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')

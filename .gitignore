@@ -1,5 +1,7 @@
 __pycache__
 gpt2/
+*.zip
+sms_spam_collection
 
 # Emacs
 *~

@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import tiktoken
 
-from notebook import generate_text_simple
+from notebooks.notebook import generate_text_simple
 from src.gpt_model import GPTModel
 from notebooks.dataloader import create_dataloader_v1
 
