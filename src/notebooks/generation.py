@@ -3,7 +3,7 @@ import torch.nn as nn
 import tiktoken
 
 from notebooks.notebook import generate_text_simple
-from src.gpt_model import GPTModel
+from gpt_model import GPTModel
 from notebooks.dataloader import create_dataloader_v1
 
 GPT_CONFIG_124M = {

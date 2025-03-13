@@ -2,7 +2,7 @@ import tiktoken
 import torch
 import torch.nn as nn
 
-from src.gpt_model import GPTModel
+from gpt_model import GPTModel
 
 GPT_CONFIG_124M = {
     "vocab_size": 50257, # Vocabulary size
@@ -39,7 +39,7 @@ print(f'Total number of params: {total_params}')
 
 # total params in feed forward and attention modules
 # print(sum(p.numel() for p in model.trf_blocks.parameters()))
-from src.transformer_block import TransformerBlock
+from transformer_block import TransformerBlock
 block = TransformerBlock(GPT_CONFIG_124M)
 block_params = GPT_CONFIG_124M['n_layers'] * (sum(p.numel() for p in block.att.parameters()) + sum(p.numel() for p in block.ff.parameters()))
 print(f'Params in ff & attn: {block_params}')

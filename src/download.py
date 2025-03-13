@@ -3,12 +3,13 @@ import tiktoken
 import torch
 import torch.nn as nn
 
-from src.gpt_model import GPTModel
-from src.gpt_download import download_and_load_gpt2
+from gpt_model import GPTModel
+from gpt_download import download_and_load_gpt2
 
 from notebooks.generation import generate
 from notebooks.generation import text_to_token_ids, token_ids_to_text
 
+'''
 tokenizer = tiktoken.get_encoding('gpt2')
 
 settings, params = download_and_load_gpt2(model_size='124M', models_dir='gpt2')
@@ -42,7 +43,7 @@ NEW_CONFIG.update({"context_length": 1024, "qkv_bias": True})
 
 gpt = GPTModel(NEW_CONFIG)
 gpt.eval();
-
+'''
 def assign(left, right):
     if left.shape != right.shape:
         raise ValueError(f"Shape mismatch. Left: {left.shape}, Right: {right.shape}")
@@ -110,7 +111,7 @@ def load_weights_into_gpt(gpt, params):
     gpt.final_norm.shift = assign(gpt.final_norm.shift, params["b"])
     gpt.out_head.weight = assign(gpt.out_head.weight, params["wte"])
     
-    
+'''    
 load_weights_into_gpt(gpt, params)
 gpt.to(device);
 
@@ -124,5 +125,5 @@ token_ids = generate(
     top_k=50,
     temperature=1.5
 )
-
 print("Output text:\n", token_ids_to_text(token_ids, tokenizer))
+'''
