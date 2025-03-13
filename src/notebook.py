@@ -2,7 +2,7 @@ import tiktoken
 import torch
 import torch.nn as nn
 
-from src.gpt_model import GPTModel
+from gpt_model import GPTModel
 
 GPT_CONFIG_124M = {
     "vocab_size": 50257, # Vocabulary size
